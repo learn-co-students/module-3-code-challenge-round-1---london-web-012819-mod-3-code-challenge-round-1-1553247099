@@ -1,4 +1,5 @@
 class API {
+
     static init() {
         this.imageId = 2242
         this.baseUrl = "https://randopic.herokuapp.com"
@@ -8,14 +9,30 @@ class API {
     }
 
     static getImage() {
-        return fetch(this.imageUrl)
+        return this.get(this.imageUrl)
+    }
+
+    static updateLike() {
+        const body = { image_id: API.imageId }
+        return this.post(this.likeURL, body)
+    }
+
+    static deleteComment(commentId) {
+        return this.delete(this.commentsURL + `/${commentId}`)
+    }
+
+    static createComment(comment) {
+        return this.post(this.commentsURL, comment)
+    }
+
+    // GET, POST, DELETE requests logic:
+
+    static get(url) {
+        return fetch(url)
             .then(response => response.json())
     }
 
-    static updateLike(imageId) {
-
-        const body = { image_id: imageId }
-
+    static post(url, body) {
         const params = {
             method: "POST",
             headers: {
@@ -25,27 +42,14 @@ class API {
             body: JSON.stringify(body)
         }
 
-        return fetch(this.likeURL, params)
+        return fetch(url, params)
             .then(response => response.json())
     }
 
-    static deleteComment(commentId) {
-        const params = { method: "DELETE" }
-        return fetch(this.commentsURL + `/${commentId}`, params)
-            .then(response => response.json())
-    }
-
-    static createComment(comment) {
-        const params = {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(comment)
-        }
-
-        return fetch(this.commentsURL, params)
+    static delete(url) {
+        return fetch(url, {
+                method: "DELETE"
+            })
             .then(response => response.json())
     }
 

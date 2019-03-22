@@ -1,4 +1,5 @@
 class CommentList {
+
     static init() {
         this.el = document.querySelector("#comments")
     }

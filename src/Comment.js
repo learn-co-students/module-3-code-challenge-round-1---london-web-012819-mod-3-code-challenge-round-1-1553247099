@@ -1,8 +1,10 @@
 class Comment {
-    constructor(comment) {
-        this.id = comment.id
-        this.content = comment.content
-        this.image_id = comment.image_id
+
+    constructor({ id, content, image_id }) {
+
+        this.id = id
+        this.content = content
+        this.image_id = image_id
 
         this.el = document.createElement("li")
         this.create()
@@ -10,6 +12,7 @@ class Comment {
 
     create() {
         this.el.innerText = this.content
+
         this.deleteBtn = document.createElement("button")
         this.deleteBtn.innerText = "X"
         this.el.appendChild(this.deleteBtn)

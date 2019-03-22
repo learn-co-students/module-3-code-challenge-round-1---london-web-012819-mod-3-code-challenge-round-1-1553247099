@@ -1,4 +1,5 @@
 class CommentForm {
+
     static init() {
         this.el = document.querySelector("#comment_form")
         this.addSubmitEvent()
@@ -10,9 +11,11 @@ class CommentForm {
 
     static handleSubmit(event) {
         event.preventDefault()
+
         const newContent = event.target.comment.value
+
         const newComment = {
-            image_id: ImageCard.id,
+            image_id: API.imageId,
             content: newContent
         }
         API.createComment(newComment)
